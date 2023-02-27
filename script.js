@@ -1,11 +1,40 @@
 const btn = document.getElementById('btn');
 const tbody = document.querySelector('tbody');
 const addTableData = [];
+function saveData(){
+    tbody.innerHTML = "";
+    
+    addTableData.map((data,index)=>{
+        const tr = document.createElement('tr');
+        const tdId = document.createElement('td');
+        tdId.textContent = index+1;
+        const tdName = document.createElement('td');
+        tdName.textContent = data.Name;
+        const tdRoll = document.createElement('td');
+        tdRoll.textContent = data.Roll;
+        const tdSubject = document.createElement('td');
+        tdSubject.textContent = data.Subject;
+        const tdMarks = document.createElement('td');
+        tdMarks.textContent = data.Marks;
+        const tdMarksBy = document.createElement('td');
+        tdMarksBy.textContent = data.MarksBy;
+        tr.appendChild(tdId);
+    tr.appendChild(tdName);
+    tr.appendChild(tdRoll);
+    tr.appendChild(tdSubject);
+    tr.appendChild(tdMarks);
+    tr.appendChild(tdMarksBy);
+
+    tbody.appendChild(tr);
+    })
+
+}
 
 function createNewRow(){
     //console.log("row");
     const tr = document.createElement('tr');
     const tdId = document.createElement('td');
+    tdId.textContent = addTableData.length + 1;
     //const inputId = document.createElement('input');
     //tdId.appendChild(inputId);
     const tdName = document.createElement('td');
@@ -26,6 +55,7 @@ function createNewRow(){
     tdMarks.appendChild(inputMarks);
     const tdMarksBy = document.createElement('td');
     const inputMarksBy = document.createElement('input');
+    inputMarks.setAttribute('type','email')
     inputMarksBy.setAttribute('type','text');
     tdMarksBy.appendChild(inputMarksBy);
     const tdBtn = document.createElement('td');
@@ -59,7 +89,7 @@ function createNewRow(){
             object.Marks=inputMarksValue,
             object.MarksBy=inputMarksByValue,
         //};
-        //console.log(obj);
+        console.log(object);
         //console.log("string");
         addTableData.push(object);
         //SaveData();
@@ -69,6 +99,7 @@ function createNewRow(){
         alert("Please enter all the fields");
     }
     console.log(object);
+    saveData();
 })
     };
 btn.addEventListener('click',createNewRow);
